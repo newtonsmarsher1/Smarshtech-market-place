@@ -438,56 +438,42 @@ function ProductsContent() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                            <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3">
                                 {filteredProducts.map((product) => (
-                                    <Link key={product.id} href={`/products/${product.id}`} className="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 border border-slate-100/50 flex flex-col relative overflow-hidden">
+                                    <Link key={product.id} href={`/products/${product.id}`} className="group bg-white rounded-xl p-2 shadow-sm hover:shadow-md transition-all border border-slate-100/50 flex flex-col relative overflow-hidden">
 
                                         {/* Status Tag */}
                                         {product.status && (
-                                            <div className={`absolute top-6 left-6 z-10 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest rounded-lg ${product.status === 'Hot Sale' ? 'bg-red-500 text-white shadow-lg shadow-red-500/30' : 'bg-slate-900 text-white shadow-lg'}`}>
+                                            <div className={`absolute top-2 left-2 z-10 px-1.5 py-0.5 text-[7px] font-black uppercase tracking-widest rounded shadow-md ${product.status === 'Hot Sale' ? 'bg-red-500 text-white' : 'bg-slate-900 text-white'}`}>
                                                 {product.status}
                                             </div>
                                         )}
 
-                                        {/* Like Button */}
-                                        <button className="absolute top-6 right-6 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md shadow-sm text-slate-400 hover:text-red-500 flex items-center justify-center transition-colors">
-                                            <Heart className="w-4 h-4" />
-                                        </button>
-
                                         {/* Image Box */}
-                                        <div className="aspect-square bg-slate-50 rounded-2xl mb-5 relative overflow-hidden flex items-center justify-center">
-                                            {/* Native Image Implementation */}
+                                        <div className="aspect-square bg-slate-50 rounded-lg mb-2 relative overflow-hidden flex items-center justify-center">
                                             <img
                                                 src={product.image}
                                                 alt={product.name}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                                             />
-                                            {/* Overlay Gradient on hover */}
-                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
                                         </div>
 
                                         {/* Product Details */}
-                                        <div className="space-y-3 flex-grow flex flex-col justify-end">
+                                        <div className="space-y-1.5 flex-grow flex flex-col justify-end">
                                             <div className="flex items-center justify-between">
-                                                <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest bg-emerald-50 px-2 py-0.5 rounded-md">{product.category}</span>
-                                                <div className="flex items-center gap-1">
-                                                    <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-                                                    <span className="text-xs font-bold text-slate-700">{product.rating} <span className="text-slate-400 font-medium">({product.reviews})</span></span>
+                                                <span className="text-[7px] font-black text-emerald-500 uppercase tracking-widest bg-emerald-50 px-1.5 py-0.5 rounded-md">{product.category}</span>
+                                                <div className="flex items-center gap-0.5">
+                                                    <Star className="w-2.5 h-2.5 text-yellow-400 fill-yellow-400" />
+                                                    <span className="text-[8px] font-bold text-slate-700">{product.rating}</span>
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-sm font-black text-slate-900 leading-snug line-clamp-2 group-hover:text-emerald-600 transition-colors">
+                                            <h3 className="text-[10px] font-black text-slate-900 leading-tight line-clamp-2 uppercase tracking-tighter group-hover:text-emerald-600 transition-colors">
                                                 {product.name}
                                             </h3>
 
-                                            <div className="pt-2 flex items-end justify-between">
-                                                <div>
-                                                    <div className="flex items-center gap-1">
-                                                        <span className="text-xs font-bold text-slate-400">KSh</span>
-                                                        <span className="text-xl font-black text-slate-900 leading-none tracking-tight">{product.price.toLocaleString()}</span>
-                                                    </div>
-                                                    <span className="text-[11px] font-bold text-slate-400 line-through mt-1 block">KSh {product.oldPrice.toLocaleString()}</span>
-                                                </div>
+                                            <div className="pt-1 flex items-end justify-between">
+                                                <p className="text-xs font-black text-slate-900 leading-none tracking-tight">KSh {product.price.toLocaleString()}</p>
                                                 <button
                                                     onClick={(e) => {
                                                         e.preventDefault();
@@ -499,9 +485,9 @@ function ProductsContent() {
                                                             imageUrl: product.image
                                                         });
                                                     }}
-                                                    className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-emerald-500 shadow-md hover:shadow-lg transition-all active:scale-95 group/cart"
+                                                    className="w-6 h-6 rounded-lg bg-slate-900 text-white flex items-center justify-center hover:bg-emerald-500 shadow-sm transition-all active:scale-95 group/cart"
                                                 >
-                                                    <ShoppingCart className="w-4 h-4 group-hover/cart:scale-110 transition-transform" />
+                                                    <ShoppingCart className="w-3 h-3 group-hover/cart:scale-110 transition-transform" />
                                                 </button>
                                             </div>
                                         </div>

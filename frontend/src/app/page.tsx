@@ -258,38 +258,38 @@ function HomeContent() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3">
               {filteredProducts.map((product) => (
-                <Link key={product.id} href={`/products/${product.id}`} className="group bg-white rounded-3xl p-4 shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col relative overflow-hidden">
+                <Link key={product.id} href={`/products/${product.id}`} className="group bg-white rounded-xl p-2 shadow-sm hover:shadow-md transition-all border border-slate-100 flex flex-col relative overflow-hidden">
                   {/* Status Tag */}
                   {product.status && (
-                    <div className="absolute top-6 left-6 z-10 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest bg-red-600 text-white rounded-md shadow-lg shadow-red-200">
+                    <div className="absolute top-2 left-2 z-10 px-1.5 py-0.5 text-[7px] font-black uppercase tracking-widest bg-red-600 text-white rounded shadow-md">
                       {product.status}
                     </div>
                   )}
 
                   {/* Image Box */}
-                  <div className="aspect-square bg-slate-50 rounded-2xl mb-5 flex items-center justify-center text-6xl group-hover:scale-105 transition-transform duration-500">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-2xl opacity-90 group-hover:opacity-100" />
+                  <div className="aspect-square bg-slate-50 rounded-lg mb-2 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-lg opacity-90 group-hover:opacity-100" />
                   </div>
 
-                  <div className="space-y-3 flex-grow flex flex-col justify-end">
+                  <div className="space-y-1.5 flex-grow flex flex-col justify-end">
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] font-black text-red-500 uppercase tracking-widest border border-red-100 px-2 py-0.5 rounded-full">{product.category}</span>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-3 h-3 text-yellow-400 fill-yellow-400" />
-                        <span className="text-[10px] font-bold text-slate-700">{product.rating}</span>
+                      <span className="text-[7px] font-black text-red-500 uppercase tracking-widest border border-red-50/50 px-1 py-0.5 rounded-full">{product.category}</span>
+                      <div className="flex items-center gap-0.5">
+                        <Star className="w-2 h-2 text-yellow-400 fill-yellow-400" />
+                        <span className="text-[8px] font-bold text-slate-700">{product.rating}</span>
                       </div>
                     </div>
 
-                    <h3 className="text-sm font-black text-slate-900 leading-snug line-clamp-2 uppercase tracking-tight">
+                    <h3 className="text-[10px] font-black text-slate-900 leading-tight line-clamp-2 uppercase tracking-tighter">
                       {product.name}
                     </h3>
 
-                    <div className="pt-2 flex items-center justify-between">
+                    <div className="pt-1 flex items-center justify-between">
                       <div>
-                        <p className="text-[10px] font-bold text-slate-400 line-through">KSh {product.oldPrice.toLocaleString()}</p>
-                        <p className="text-lg font-black text-red-600 leading-none">KSh {product.price.toLocaleString()}</p>
+                        {/* <p className="text-[7px] font-bold text-slate-400 line-through">KSh {product.oldPrice.toLocaleString()}</p> */}
+                        <p className="text-xs font-black text-red-600 leading-none">KSh {product.price.toLocaleString()}</p>
                       </div>
                       <button
                         onClick={(e) => {
@@ -302,9 +302,9 @@ function HomeContent() {
                             imageUrl: product.image
                           });
                         }}
-                        className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-red-600 transition-all shadow-md group/cart"
+                        className="w-6 h-6 rounded-lg bg-slate-900 text-white flex items-center justify-center hover:bg-red-600 transition-all shadow-sm group/cart"
                       >
-                        <ShoppingCart className="w-4 h-4 group-hover/cart:scale-110 transition-transform" />
+                        <ShoppingCart className="w-3 h-3 group-hover/cart:scale-110 transition-transform" />
                       </button>
                     </div>
                   </div>
@@ -314,18 +314,18 @@ function HomeContent() {
           </div>
         </div>
 
-        {/* Support Section at Bottom */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24 mb-12">
+        {/* Support Section at Bottom (Burner) */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-16 mb-8">
           {[
-            { icon: '🚛', title: 'Free Delivery', desc: 'On orders over KSh 2,500', color: 'bg-emerald-600' },
-            { icon: '💳', title: 'Secure Payment', desc: '100% Secure Transaction', color: 'bg-indigo-600' },
-            { icon: '🕒', title: '24/7 Support', desc: 'Dedicated support team', color: 'bg-red-600' }
+            { icon: '🚛', title: 'Free Delivery', desc: 'Over KSh 2,500', color: 'bg-emerald-600' },
+            { icon: '💳', title: 'Secure Payment', desc: '100% Protected', color: 'bg-indigo-600' },
+            { icon: '🕒', title: '24/7 Support', desc: 'Dedicated Team', color: 'bg-red-600' }
           ].map((item, i) => (
-            <div key={i} className={`${item.color} p-8 rounded-[2.5rem] flex items-center gap-6 shadow-xl text-white`}>
-              <div className="text-4xl bg-white/20 p-4 rounded-3xl">{item.icon}</div>
+            <div key={i} className={`${item.color} p-4 rounded-2xl flex items-center gap-4 shadow-lg text-white`}>
+              <div className="text-2xl bg-white/20 p-2.5 rounded-xl">{item.icon}</div>
               <div>
-                <p className="text-xl font-black leading-tight uppercase tracking-tight">{item.title}</p>
-                <p className="text-sm font-medium opacity-80">{item.desc}</p>
+                <p className="text-sm font-black leading-tight uppercase tracking-tight">{item.title}</p>
+                <p className="text-[10px] font-medium opacity-80">{item.desc}</p>
               </div>
             </div>
           ))}
