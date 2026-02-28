@@ -35,11 +35,17 @@ export default function LoginPage() {
         document.body.appendChild(script);
 
         script.onload = () => {
-            if (window.google) {
+            const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+            console.log('Google Client ID found:', clientId ? 'Yes (starts with ' + clientId.substring(0, 10) + '...)' : 'No (Undefined)');
+
+            if (window.google && clientId) {
                 window.google.accounts.id.initialize({
-                    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+                    client_id: clientId,
                     callback: handleGoogleResponse,
                 });
+            } else if (!clientId) {
+                console.warn('Google Client ID is missing! Login button will not work.');
+                setError('Google Authentication is not configured correctly. Please check server environment variables.');
             }
         };
 

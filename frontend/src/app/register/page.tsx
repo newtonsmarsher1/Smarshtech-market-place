@@ -29,9 +29,12 @@ export default function RegisterPage() {
         document.body.appendChild(script);
 
         script.onload = () => {
-            if (window.google) {
+            const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+            console.log('Google Client ID found:', clientId ? 'Yes' : 'No');
+
+            if (window.google && clientId) {
                 window.google.accounts.id.initialize({
-                    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+                    client_id: clientId,
                     callback: handleGoogleResponse,
                 });
             }
