@@ -101,6 +101,182 @@ function HomeContent() {
       reviews: 112,
       status: '',
       image: 'https://images.unsplash.com/photo-1585514606772-2dc92ebf68ca?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '9',
+      name: 'iPhone 15 Pro Max (256GB)',
+      price: 185000,
+      oldPrice: 195000,
+      category: 'Phones & Accessories',
+      rating: 4.9,
+      reviews: 1250,
+      status: 'Bestseller',
+      image: 'https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '10',
+      name: 'Dyson V15 Detect Vacuum',
+      price: 95000,
+      oldPrice: 105000,
+      category: 'Appliances',
+      rating: 4.8,
+      reviews: 89,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '11',
+      name: 'Levi\'s 501 Original Fit Jeans',
+      price: 7500,
+      oldPrice: 9000,
+      category: 'Fashion',
+      rating: 4.7,
+      reviews: 1540,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '12',
+      name: 'KitchenAid Artisan Stand Mixer',
+      price: 65000,
+      oldPrice: 75000,
+      category: 'Kitchen',
+      rating: 4.9,
+      reviews: 512,
+      status: 'Professional',
+      image: 'https://images.unsplash.com/photo-1594385208974-2e75f9d8a847?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '13',
+      name: 'Bose QuietComfort Earbuds II',
+      price: 28000,
+      oldPrice: 32000,
+      category: 'Electronics',
+      rating: 4.8,
+      reviews: 245,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '14',
+      name: 'Apple Watch Ultra 2',
+      price: 115000,
+      oldPrice: 125000,
+      category: 'Watches',
+      rating: 4.9,
+      reviews: 178,
+      status: 'New',
+      image: 'https://images.unsplash.com/photo-1434493907317-a46b5bc78344?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '15',
+      name: 'Razer DeathAdder V3 Pro Mouse',
+      price: 16500,
+      oldPrice: 18500,
+      category: 'Gaming',
+      rating: 4.7,
+      reviews: 321,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '16',
+      name: 'La Mer Crème de la Mer 60ml',
+      price: 45000,
+      oldPrice: 50000,
+      category: 'Beauty',
+      rating: 4.8,
+      reviews: 124,
+      status: 'Luxury',
+      image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '17',
+      name: 'GoPro HERO12 Black',
+      price: 58000,
+      oldPrice: 65000,
+      category: 'Electronics',
+      rating: 4.7,
+      reviews: 89,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1565349195357-741607fef3ad?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '18',
+      name: 'Nintendo Switch OLED Model',
+      price: 48000,
+      oldPrice: 55000,
+      category: 'Gaming',
+      rating: 4.9,
+      reviews: 1560,
+      status: 'Popular',
+      image: 'https://images.unsplash.com/photo-1578303372764-1e436093ca63?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '19',
+      name: 'T-Shirts Multipack (5-Pack)',
+      price: 3500,
+      oldPrice: 5000,
+      category: 'Fashion',
+      rating: 4.5,
+      reviews: 125,
+      status: 'Value Pick',
+      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '20',
+      name: 'Philips Air Fryer XXL',
+      price: 38000,
+      oldPrice: 45000,
+      category: 'Kitchen',
+      rating: 4.8,
+      reviews: 876,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1584905066893-7d5c142ba4e1?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '21',
+      name: 'Sony A7 IV Mirrorless Camera',
+      price: 320000,
+      oldPrice: 350000,
+      category: 'Electronics',
+      rating: 5.0,
+      reviews: 43,
+      status: 'Pro',
+      image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '22',
+      name: 'Ray-Ban Classic Aviator',
+      price: 18500,
+      oldPrice: 22000,
+      category: 'Fashion',
+      rating: 4.8,
+      reviews: 567,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1511499767010-a588b5b2f126?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '23',
+      name: 'Instant Pot Pro 10-in-1',
+      price: 24000,
+      oldPrice: 28000,
+      category: 'Kitchen',
+      rating: 4.7,
+      reviews: 1240,
+      status: '',
+      image: 'https://images.unsplash.com/photo-1544233726-9f1d2b27be8b?auto=format&fit=crop&q=80&w=800'
+    },
+    {
+      id: '24',
+      name: 'Yeti Rambler 20 oz Tumbler',
+      price: 5500,
+      oldPrice: 7000,
+      category: 'Home & Kitchen',
+      rating: 4.9,
+      reviews: 2341,
+      status: 'Elite',
+      image: 'https://images.unsplash.com/photo-1589365278144-c9e705f843ba?auto=format&fit=crop&q=80&w=800'
     }
   ];
 
