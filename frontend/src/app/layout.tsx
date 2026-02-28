@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 import AuthProvider from "@/components/AuthProvider";
 import FloatingPreferenceBall from "@/components/FloatingPreferenceBall";
 import ThemeHandler from "@/components/ThemeHandler";
+import Minifooter from "@/components/Minifooter";
 
 export default function RootLayout({
   children,
@@ -37,6 +38,7 @@ export default function RootLayout({
         <AuthProvider>
           {children}
           <FloatingPreferenceBall />
+          <Minifooter />
         </AuthProvider>
       </body>
     </html>
