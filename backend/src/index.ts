@@ -21,9 +21,21 @@ if (fs.existsSync(path.join(__dirname, '../.env'))) {
 const app = express();
 
 const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+    console.error('DATABASE_URL is missing from environment variables!');
+}
+
+console.log('Initializing Prisma with Driver Adapter...');
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({ adapter });
+
+// In Prisma 7, the adapter is passed directly in the constructor options
+const prisma = new PrismaClient({
+    adapter: adapter
+});
+
+console.log('Prisma Client initialized successfully.');
 
 // Test DB Connection
 app.get('/api/health', async (req, res) => {
