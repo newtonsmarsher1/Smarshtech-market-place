@@ -7,6 +7,8 @@ import productRoutes from './routes/productRoutes';
 import orderRoutes from './routes/orderRoutes';
 import sellerRoutes from './routes/sellerRoutes';
 import { PrismaClient } from '@prisma/client';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 import fs from 'fs';
 import path from 'path';
@@ -17,7 +19,11 @@ if (fs.existsSync(path.join(__dirname, '../.env'))) {
 }
 
 const app = express();
-const prisma = new PrismaClient();
+
+const connectionString = process.env.DATABASE_URL;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
 
 // Test DB Connection
 app.get('/api/health', async (req, res) => {

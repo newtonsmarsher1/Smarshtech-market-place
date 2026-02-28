@@ -18,6 +18,8 @@
     "prisma": "^7.4.2",
     "@prisma/client": "^7.4.2",
     "@prisma/config": "^7.4.2",
+    "@prisma/adapter-pg": "^7.4.2",
+    "pg": "^8.13.1",
     "axios": "^1.13.6",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^2.9.0",
@@ -38,6 +40,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
-    "@types/node": "^25.3.2"
+    "@types/node": "^25.3.2",
+    "@types/pg": "^8.11.10"
   }
 }
