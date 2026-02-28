@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 
 import AuthProvider from "@/components/AuthProvider";
 import FloatingPreferenceBall from "@/components/FloatingPreferenceBall";
+import ThemeHandler from "@/components/ThemeHandler";
 
 export default function RootLayout({
   children,
@@ -31,7 +32,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${montserrat.variable} font-inter antialiased`}>
+      <body className={`${inter.variable} ${montserrat.variable} font-inter antialiased transition-colors duration-300`}>
+        <ThemeHandler />
         <AuthProvider>
           {children}
           <FloatingPreferenceBall />
