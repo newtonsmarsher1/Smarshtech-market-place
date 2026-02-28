@@ -16,7 +16,7 @@ const Footer = () => {
                         <span className="text-xl font-black text-slate-900 tracking-tighter">Clouds<span className="text-red-600 italic">Mall</span></span>
                     </Link>
                     <p className="text-slate-500 leading-tight font-bold uppercase text-[10px] tracking-wider max-w-[200px]">
-                        Kenya's NO.1 Professional Marketplace
+                        Kenya's NO.1 Online Marketplace
                     </p>
                     <div className="flex space-x-3">
                         <a href="#" className="p-2 bg-slate-100 rounded-lg hover:bg-red-600 hover:text-white transition-all">

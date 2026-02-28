@@ -14,7 +14,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Clouds Mall | Africa's Online Shopping Mall | Kilimall Style Experience",
+  title: "Clouds Mall | Africa's Online Shopping Mall | Cloudsmall Style Experience",
   description: "Shop for the best phones, electronics, fashion and more on Clouds Mall Kenya. Fast delivery and secure payments.",
   icons: {
     icon: '/icon.png',
