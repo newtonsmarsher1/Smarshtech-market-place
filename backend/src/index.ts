@@ -11,13 +11,23 @@ import { PrismaClient } from '@prisma/client';
 dotenv.config();
 
 const app = express();
-const prisma = new PrismaClient({
-    datasourceUrl: process.env.DATABASE_URL
+const prisma = new PrismaClient();
+
+// Test DB Connection
+app.get('/api/health', async (req, res) => {
+    try {
+        await prisma.$queryRaw`SELECT 1`;
+        res.json({ status: 'ok', database: 'connected' });
+    } catch (error: any) {
+        console.error('Database connection error:', error);
+        res.status(500).json({ status: 'error', message: error.message });
+    }
 });
+
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || '*',
     credentials: true,
 }));
 app.use(express.json());
@@ -30,7 +40,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/sellers', sellerRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Clouds Mall API');
+    res.send('Clouds Mall API is Live');
 });
 
 if (process.env.NODE_ENV !== 'production') {
