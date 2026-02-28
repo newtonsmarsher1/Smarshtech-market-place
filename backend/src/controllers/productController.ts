@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../index';
 import Fuse from 'fuse.js';
-
-const prisma = new PrismaClient();
 
 export const searchProducts = async (req: Request, res: Response) => {
     try {
@@ -47,7 +45,7 @@ export const searchProducts = async (req: Request, res: Response) => {
 
 export const getSimilarProducts = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params;
+        const id = req.params.id as string;
         const product = await prisma.product.findUnique({ where: { id } });
 
         if (!product) {
@@ -71,7 +69,7 @@ export const getSimilarProducts = async (req: Request, res: Response) => {
 
 export const getProductsByCategory = async (req: Request, res: Response) => {
     try {
-        const { category } = req.params;
+        const category = req.params.category as string;
         const products = await prisma.product.findMany({
             where: {
                 category: category.toUpperCase() as any
