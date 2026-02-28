@@ -36,8 +36,9 @@ router.patch('/approve/:id', protect, authorize('ADMIN'), async (req, res) => {
     const { status } = req.body; // APPROVED or REJECTED
 
     try {
+        const id = req.params.id as string;
         const seller = await prisma.seller.update({
-            where: { id: req.params.id },
+            where: { id },
             data: { approvalStatus: status }
         });
 
