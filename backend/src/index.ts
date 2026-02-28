@@ -8,10 +8,22 @@ import orderRoutes from './routes/orderRoutes';
 import sellerRoutes from './routes/sellerRoutes';
 import { PrismaClient } from '@prisma/client';
 
-dotenv.config();
+import fs from 'fs';
+import path from 'path';
+
+// Only load .env in development (Vercel provides them directly)
+if (fs.existsSync(path.join(__dirname, '../.env'))) {
+    dotenv.config();
+}
 
 const app = express();
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+    datasources: {
+        db: {
+            url: process.env.DATABASE_URL,
+        },
+    },
+});
 
 // Test DB Connection
 app.get('/api/health', async (req, res) => {

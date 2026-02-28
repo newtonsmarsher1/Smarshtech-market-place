@@ -2,7 +2,10 @@ import { defineConfig } from '@prisma/config';
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.join(__dirname, '.env') });
+// Only load .env if DATABASE_URL isn't already set (e.g., in Vercel)
+if (!process.env.DATABASE_URL) {
+    dotenv.config({ path: path.join(__dirname, '.env') });
+}
 
 export default defineConfig({
     schema: './prisma/schema.prisma',
