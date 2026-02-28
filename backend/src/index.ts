@@ -17,13 +17,7 @@ if (fs.existsSync(path.join(__dirname, '../.env'))) {
 }
 
 const app = express();
-const prisma = new PrismaClient({
-    datasources: {
-        db: {
-            url: process.env.DATABASE_URL,
-        },
-    },
-});
+const prisma = new PrismaClient();
 
 // Test DB Connection
 app.get('/api/health', async (req, res) => {
