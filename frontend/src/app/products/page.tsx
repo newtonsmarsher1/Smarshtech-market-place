@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/useCartStore';
 import Navbar from '@/components/Navbar';
@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { Search, Filter, Star, ShoppingCart, Heart, TrendingUp, Sparkles, Zap, ChevronRight, Package, Apple, ChevronLeft, ArrowRight } from 'lucide-react';
 
-export default function ProductsPage() {
+function ProductsContent() {
     // Upgraded sample data with more realistic e-commerce information
     const premiumProducts = [
         {
@@ -523,5 +523,17 @@ export default function ProductsPage() {
             </main>
             <Footer />
         </div>
+    );
+}
+
+export default function ProductsPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+                <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+            </div>
+        }>
+            <ProductsContent />
+        </Suspense>
     );
 }

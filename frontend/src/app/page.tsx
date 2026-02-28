@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/useCartStore';
 import Navbar from '@/components/Navbar';
@@ -12,7 +12,7 @@ import {
   Filter, ShoppingCart, Search, Sparkles
 } from 'lucide-react';
 
-export default function HomePage() {
+function HomeContent() {
   const premiumProducts = [
     {
       id: '1',
@@ -334,5 +334,17 @@ export default function HomePage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <HomeContent />
+    </Suspense>
   );
 }
