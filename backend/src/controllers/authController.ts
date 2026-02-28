@@ -9,8 +9,8 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const setTokenCookie = (res: Response, token: string) => {
     res.cookie('token', token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax', // Use lax for easier dev
+        secure: true, // Always true for SameSite: None 
+        sameSite: 'none', // Required for cross-domain Vercel setup
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 };
