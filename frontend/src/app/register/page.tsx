@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { Mail, Phone, Lock, Hash, ArrowRight, ShieldCheck, User, Sparkles, MailWarning } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import api from '@/utils/api';
 
 export default function RegisterPage() {
     const [registerMethod, setRegisterMethod] = useState<'email' | 'phone'>('email');
@@ -76,10 +76,7 @@ export default function RegisterPage() {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/register',
-                { name, email, password, role: 'BUYER' },
-                { withCredentials: true }
-            );
+            const res = await api.post('/auth/register', { name, email, password, role: 'BUYER' });
             setUser(res.data.user);
             router.push('/profile');
         } catch (err: any) {
@@ -141,11 +138,11 @@ export default function RegisterPage() {
                     </div>
 
                     {/* Left Register Form */}
-                    <div className="w-full md:w-[55%] p-8 md:p-14 bg-white relative">
+                    <div className="w-full md:w-[55%] p-6 md:p-14 bg-white relative">
                         <div className="max-w-[420px] mx-auto">
-                            <div className="mb-10 text-center md:text-left">
-                                <h1 className="text-4xl font-black text-slate-900 mb-3 tracking-tighter">Create Account</h1>
-                                <p className="text-slate-500 font-medium text-sm">Join us and start shopping in seconds.</p>
+                            <div className="mb-8 md:mb-10 text-center md:text-left">
+                                <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-3 tracking-tighter uppercase">Create Account</h1>
+                                <p className="text-slate-500 font-medium text-xs md:text-sm">Join us and start shopping in seconds.</p>
                             </div>
 
                             {error && (

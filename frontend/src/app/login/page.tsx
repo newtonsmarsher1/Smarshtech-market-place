@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { Mail, Phone, Lock, Hash, ArrowRight, ShieldCheck, MailWarning } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import api from '@/utils/api';
 
 declare global {
     interface Window {
@@ -84,10 +84,7 @@ export default function LoginPage() {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login',
-                { email, password },
-                { withCredentials: true }
-            );
+            const res = await api.post('/auth/login', { email, password });
             setUser(res.data.user);
             router.push('/profile');
         } catch (err: any) {
@@ -152,11 +149,11 @@ export default function LoginPage() {
                     </div>
 
                     {/* Right Login Form */}
-                    <div className="w-full md:w-[55%] p-8 md:p-14 bg-white relative">
+                    <div className="w-full md:w-[55%] p-6 md:p-14 bg-white relative">
                         <div className="max-w-[420px] mx-auto">
-                            <div className="mb-10 text-center md:text-left">
-                                <h1 className="text-4xl font-black text-slate-900 mb-3 tracking-tighter">Welcome Back</h1>
-                                <p className="text-slate-500 font-medium text-sm">Please sign in to continue to your account.</p>
+                            <div className="mb-8 md:mb-10 text-center md:text-left">
+                                <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-3 tracking-tighter uppercase">Welcome Back</h1>
+                                <p className="text-slate-500 font-medium text-xs md:text-sm">Please sign in to continue to your account.</p>
                             </div>
 
                             {error && (
