@@ -37,7 +37,7 @@ export default function LoginPage() {
         script.onload = () => {
             if (window.google) {
                 window.google.accounts.id.initialize({
-                    client_id: "your-google-client-id-here.apps.googleusercontent.com", // This should match .env eventually
+                    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
                     callback: handleGoogleResponse,
                 });
             }
