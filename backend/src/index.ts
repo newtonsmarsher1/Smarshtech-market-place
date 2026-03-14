@@ -1,4 +1,3 @@
-// Deployment trigger - Vercel sync kick
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -32,7 +31,7 @@ let prisma: PrismaClient;
 try {
     console.log('Initializing Database Pool...');
     const pool = new Pool({ connectionString });
-    const adapter = new PrismaPg(pool);
+    const adapter = new PrismaPg(pool as any);
 
     console.log('Initializing Prisma Client with Driver Adapter...');
     prisma = new PrismaClient({
