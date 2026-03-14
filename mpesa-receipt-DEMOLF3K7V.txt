@@ -1,0 +1,11 @@
+MPESA PAYMENT RECEIPT
+====================
+
+Receipt Number: DEMOLF3K7V
+Amount: KES 100.00
+Phone Number: 254114710035
+Reference: ORDER520442OE4
+Date: 3/13/2026, 4:45:31 PM
+Status: Success
+
+Thank you for your payment!
