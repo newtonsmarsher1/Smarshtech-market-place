@@ -1,7 +1,7 @@
 import express from 'express';
 import { protect } from '../middlewares/authMiddleware';
 import { authorize } from '../middlewares/roleMiddleware';
-import { prisma } from '../index';
+import { prisma } from '../lib/prisma';
 
 const router = express.Router();
 

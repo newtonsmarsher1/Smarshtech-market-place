@@ -6,9 +6,7 @@ import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
 import orderRoutes from './routes/orderRoutes';
 import sellerRoutes from './routes/sellerRoutes';
-import { PrismaClient } from '@prisma/client';
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { prisma } from './lib/prisma';
 
 import fs from 'fs';
 import path from 'path';
@@ -19,30 +17,6 @@ if (fs.existsSync(path.join(__dirname, '../.env'))) {
 }
 
 const app = express();
-
-const connectionString = process.env.DATABASE_URL;
-
-if (!connectionString) {
-    console.error('CRITICAL: DATABASE_URL is missing from environment variables!');
-}
-
-let prisma: PrismaClient;
-
-try {
-    console.log('Initializing Database Pool...');
-    const pool = new Pool({ connectionString });
-    const adapter = new PrismaPg(pool as any);
-
-    console.log('Initializing Prisma Client with Driver Adapter...');
-    prisma = new PrismaClient({
-        adapter: adapter
-    });
-    console.log('Prisma Client initialized.');
-} catch (error) {
-    console.error('FATAL ERROR DURING PRISMA INITIALIZATION:', error);
-    // Create a dummy client to avoid type errors, but queries will fail (which we handle in health/controllers)
-    prisma = new PrismaClient(); 
-}
 
 // Test DB Connection
 app.get('/api/health', async (req, res) => {
