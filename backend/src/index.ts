@@ -23,19 +23,26 @@ const app = express();
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
-    console.error('DATABASE_URL is missing from environment variables!');
+    console.error('CRITICAL: DATABASE_URL is missing from environment variables!');
 }
 
-console.log('Initializing Prisma with Driver Adapter...');
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
+let prisma: PrismaClient;
 
-// In Prisma 7, the adapter is passed directly in the constructor options
-const prisma = new PrismaClient({
-    adapter: adapter
-});
+try {
+    console.log('Initializing Database Pool...');
+    const pool = new Pool({ connectionString });
+    const adapter = new PrismaPg(pool);
 
-console.log('Prisma Client initialized successfully.');
+    console.log('Initializing Prisma Client with Driver Adapter...');
+    prisma = new PrismaClient({
+        adapter: adapter
+    });
+    console.log('Prisma Client initialized.');
+} catch (error) {
+    console.error('FATAL ERROR DURING PRISMA INITIALIZATION:', error);
+    // Create a dummy client to avoid type errors, but queries will fail (which we handle in health/controllers)
+    prisma = new PrismaClient(); 
+}
 
 // Test DB Connection
 app.get('/api/health', async (req, res) => {
