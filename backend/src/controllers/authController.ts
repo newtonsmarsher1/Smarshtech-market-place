@@ -19,12 +19,25 @@ export const register = async (req: Request, res: Response) => {
     const { name, email, password, role } = req.body;
 
     try {
+        console.log('Registration attempt for:', email);
+        console.log('Data received:', { name, email, role, passwordProvided: !!password });
+
+        if (!email || !password || !name) {
+            console.log('Validation failed: Missing fields');
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+
         const userExists = await prisma.user.findUnique({ where: { email } });
+        console.log('User exists check:', userExists ? 'User already exists' : 'New user');
+
         if (userExists) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
+        console.log('Hashing password...');
         const hashedPassword = await bcrypt.hash(password, 10);
+        
+        console.log('Creating user in database...');
         const user = await prisma.user.create({
             data: {
                 name,
@@ -33,15 +46,19 @@ export const register = async (req: Request, res: Response) => {
                 role: role || 'BUYER',
             },
         });
+        console.log('User created successfully:', user.id);
 
+        console.log('Signing token (JWT_SECRET exists:', !!process.env.JWT_SECRET, ')');
         const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET!, {
             expiresIn: '7d',
         });
 
+        console.log('Setting cookie...');
         setTokenCookie(res, token);
         res.status(201).json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error', error });
+    } catch (error: any) {
+        console.error('Registration error (detailed):', error);
+        res.status(500).json({ message: 'Server error during registration', error: error.message || error });
     }
 };
 
