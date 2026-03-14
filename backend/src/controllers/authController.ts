@@ -49,24 +49,39 @@ export const login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
+        console.log('Login attempt for:', email);
+        if (!process.env.DATABASE_URL) {
+            console.error('CRITICAL: DATABASE_URL is missing!');
+        }
+
         const user = await prisma.user.findUnique({ where: { email } });
+        console.log('User search result:', user ? 'Found' : 'Not Found');
+
         if (!user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log('Password match:', isMatch);
+
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET!, {
+        if (!process.env.JWT_SECRET) {
+            throw new Error("JWT_SECRET environment variable is missing!");
+        }
+
+        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: '7d',
         });
 
+        console.log('Login successful, setting cookie...');
         setTokenCookie(res, token);
         res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } });
-    } catch (error) {
-        res.status(500).json({ message: 'Server error', error });
+    } catch (error: any) {
+        console.error('Login error (detailed):', error);
+        res.status(500).json({ message: 'Server error', error: error.message || error });
     }
 };
 
@@ -74,21 +89,25 @@ export const googleLogin = async (req: Request, res: Response) => {
     const { idToken } = req.body;
 
     try {
+        console.log('googleLogin hit. Decoding token...');
         const ticket = await client.verifyIdToken({
             idToken,
             audience: process.env.GOOGLE_CLIENT_ID,
         });
 
         const payload = ticket.getPayload();
+        console.log('Google payload received:', payload ? 'Yes' : 'No');
         if (!payload) {
             return res.status(400).json({ message: 'Invalid Google token' });
         }
 
         const { sub: googleId, email, name, picture } = payload;
-
+        
+        console.log('Checking if user exists:', email);
         let user = await prisma.user.findUnique({ where: { email } });
 
         if (!user) {
+            console.log('User not found, creating new user...');
             // Create user if doesn't exist
             user = await prisma.user.create({
                 data: {
@@ -98,17 +117,24 @@ export const googleLogin = async (req: Request, res: Response) => {
                     role: 'BUYER',
                 },
             });
+            console.log('User created:', user.id);
         }
 
-        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET!, {
+        console.log('Signing JWT...');
+        if (!process.env.JWT_SECRET) {
+             throw new Error("JWT_SECRET environment variable is missing!");
+        }
+        
+        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: '7d',
         });
 
+        console.log('Setting cookie and formatting response...');
         setTokenCookie(res, token);
         res.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } });
-    } catch (error) {
-        console.error('Google login error:', error);
-        res.status(500).json({ message: 'Google login failed', error });
+    } catch (error: any) {
+        console.error('Google login error (detailed):', error);
+        res.status(500).json({ message: 'Google login failed', error: error.message || error });
     }
 };
 
